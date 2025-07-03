@@ -1,21 +1,37 @@
+// frontend/src/app/app.component.ts
+// Lógica del componente principal.
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+// 1. Importa RouterOutlet y RouterLink para la navegación
+import { RouterOutlet, RouterLink } from '@angular/router'; 
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MsalService, MsalBroadcastService } from '@azure/msal-angular';
 import { InteractionStatus, AuthenticationResult } from '@azure/msal-browser';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [
+    CommonModule, 
+    HttpClientModule,
+    RouterOutlet, // <-- 2. Añade RouterOutlet aquí
+    RouterLink    // <-- 3. Añade RouterLink aquí
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'Angular + Flask';
+  title = 'Argos Web App'; // Título actualizado
   isLoggedIn = false;
   userName: string | undefined = '';
   
+  // 4. Variable para controlar la visibilidad del sidebar
+  isSidebarVisible = true; 
+
   backendResponse: any = null;
   graphProfile: any = null;
   
@@ -42,6 +58,11 @@ export class AppComponent implements OnInit, OnDestroy {
       });
   }
 
+  // 5. Función para mostrar/ocultar el sidebar
+  toggleSidebar() {
+    this.isSidebarVisible = !this.isSidebarVisible;
+  }
+
   checkAccount() {
     const activeAccount = this.authService.instance.getActiveAccount();
     this.isLoggedIn = !!activeAccount;
@@ -57,7 +78,7 @@ export class AppComponent implements OnInit, OnDestroy {
           this.authService.instance.setActiveAccount(result.account);
           this.checkAccount();
         },
-        error: (error) => console.log(error)
+        error: (error: any) => console.log(error)
       });
   }
 
@@ -65,6 +86,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authService.logoutPopup({ mainWindowRedirectUri: "/" });
   }
 
+  // ... (los métodos getDataFromBackend y getProfileFromGraph se mantienen igual)
   getDataFromBackend() {
     this.loadingBackend = true;
     this.backendResponse = null;
@@ -100,6 +122,7 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     });
   }
+
 
   ngOnDestroy(): void {
     this._destroying$.next(undefined);

@@ -1,90 +1,75 @@
-<!-- frontend/src/app/app.component.html -->
-<!-- Plantilla HTML con estilos de Bootstrap -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
-  <div class="container">
-    <a class="navbar-brand" href="#">
-      <i class="bi bi-shield-lock-fill"></i>
-      {{ title }}
-    </a>
-    <div class="d-flex">
-      <button *ngIf="!isLoggedIn" (click)="login()" class="btn btn-light">
-        <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión
-      </button>
-      <div *ngIf="isLoggedIn" class="dropdown">
-        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
-          <i class="bi bi-person-circle"></i> {{ userName }}
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end">
-          <li><a class="dropdown-item" (click)="logout()">
-            <i class="bi bi-box-arrow-right"></i> Cerrar Sesión</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</nav>
-
-<main class="container mt-5">
-  <div class="p-5 mb-4 bg-white rounded-3 shadow-sm border">
-    <div class="container-fluid py-5">
-      <h1 class="display-5 fw-bold">Aplicación de Demostración</h1>
-      <p class="col-md-10 fs-4">
-        Frontend en Angular autenticado con Azure AD, consumiendo datos de un backend en Flask y de la API de Microsoft Graph.
-      </p>
-
-      <div *ngIf="!isLoggedIn">
-        <p>Por favor, inicia sesión para acceder a los recursos protegidos.</p>
-        <button (click)="login()" class="btn btn-primary btn-lg">
-          <i class="bi bi-microsoft"></i> Iniciar Sesión con Microsoft
-        </button>
-      </div>
-
-      <div *ngIf="isLoggedIn">
-        <p class="text-success">¡Has iniciado sesión correctamente!</p>
-        <div class="d-flex flex-wrap gap-2">
-            <button class="btn btn-success" (click)="getDataFromBackend()" [disabled]="loadingBackend">
-              <span *ngIf="loadingBackend" class="spinner-border spinner-border-sm"></span>
-              <i *ngIf="!loadingBackend" class="bi bi-server"></i>
-              {{ loadingBackend ? 'Cargando...' : 'Llamar a API Flask' }}
-            </button>
-            <button class="btn btn-info text-white" (click)="getProfileFromGraph()" [disabled]="loadingGraph">
-              <span *ngIf="loadingGraph" class="spinner-border spinner-border-sm"></span>
-              <i *ngIf="!loadingGraph" class="bi bi-microsoft"></i>
-              {{ loadingGraph ? 'Cargando...' : 'Llamar a MS Graph' }}
-            </button>
+<!-- Pantalla de Login (sin cambios) -->
+<div *ngIf="!isLoggedIn" class="login-container">
+  <div class="container-fluid h-100">
+    <div class="row h-100">
+      <div class="col-md-6 d-none d-md-block image-half"></div>
+      <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-center p-5 form-half">
+        <div class="login-box">
+          <i class="bi bi-shield-lock-fill display-1 text-primary"></i>
+          <h1 class="display-5 fw-bold mt-3">Bienvenido a Argos</h1>
+          <p class="fs-4 text-muted">Por favor, inicia sesión para continuar.</p>
+          <button (click)="login()" class="btn btn-primary btn-lg mt-4 w-100">
+            <i class="bi bi-microsoft"></i> Iniciar Sesión con Microsoft
+          </button>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <div *ngIf="errorMessage" class="alert alert-danger mt-4">
-    <strong>Error:</strong> {{ errorMessage }}
-  </div>
 
-  <div class="row">
-    <!-- Card para la respuesta del Backend -->
-    <div *ngIf="backendResponse" class="col-md-6 mb-4">
-      <div class="card h-100 shadow-sm">
-        <div class="card-header bg-dark text-white">
-          <h5 class="mb-0">Respuesta del Backend Flask</h5>
-        </div>
-        <div class="card-body">
-          <pre class="bg-light p-3 rounded"><code>{{ backendResponse | json }}</code></pre>
-        </div>
+<!-- App Principal cuando el usuario SÍ ha iniciado sesión -->
+<ng-container *ngIf="isLoggedIn">
+  <!-- 1. Contenedor principal que reacciona al estado del sidebar -->
+  <div class="main-container" [class.sidebar-collapsed]="!isSidebarVisible">
+
+    <!-- 2. Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <i class="bi bi-shield-check-fill me-2"></i>
+        <span>{{ title }}</span>
       </div>
+      <ul class="nav-links">
+        <li><a routerLink="/vista1" routerLinkActive="active"><i class="bi bi-bar-chart-fill"></i><span>Vista 1</span></a></li>
+        <li><a routerLink="/vista2" routerLinkActive="active"><i class="bi bi-table"></i><span>Vista 2</span></a></li>
+        <li><a routerLink="/vista3" routerLinkActive="active"><i class="bi bi-pie-chart-fill"></i><span>Vista 3</span></a></li>
+        <li><a routerLink="/vista4" routerLinkActive="active"><i class="bi bi-person-lines-fill"></i><span>Vista 4</span></a></li>
+        <li><a routerLink="/vista5" routerLinkActive="active"><i class="bi bi-gear-fill"></i><span>Vista 5</span></a></li>
+        <li><a routerLink="/vista6" routerLinkActive="active"><i class="bi bi-question-circle-fill"></i><span>Vista 6</span></a></li>
+      </ul>
     </div>
 
-    <!-- Card para la respuesta de MS Graph -->
-    <div *ngIf="graphProfile" class="col-md-6 mb-4">
-      <div class="card h-100 shadow-sm">
-        <div class="card-header bg-dark text-white">
-          <h5 class="mb-0">Respuesta de Microsoft Graph API</h5>
+    <!-- 3. Contenido Principal -->
+    <div class="main-content">
+      <!-- Barra de navegación superior -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container-fluid">
+          <!-- Botón para ocultar/mostrar el sidebar -->
+          <button class="btn btn-outline-primary" (click)="toggleSidebar()">
+            <i class="bi bi-list"></i>
+          </button>
+          
+          <!-- Menú de usuario a la derecha -->
+          <div class="d-flex ms-auto">
+            <div class="dropdown">
+              <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                <i class="bi bi-person-circle"></i> {{ userName }}
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" (click)="logout()">
+                  <i class="bi bi-box-arrow-right"></i> Cerrar Sesión</a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="card-body">
-          <pre class="bg-light p-3 rounded"><code>{{ graphProfile | json }}</code></pre>
-        </div>
-      </div>
+      </nav>
+
+      <!-- 4. Área donde se renderizarán las vistas -->
+      <main class="content-area p-4">
+        <router-outlet></router-outlet>
+      </main>
+      
     </div>
   </div>
-
-</main>
+</ng-container>

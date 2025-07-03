@@ -1,25 +1,98 @@
-.card {
-    min-height: 200px;
+/* Estilos existentes para el login (sin cambios) */
+.login-container { height: 100vh; width: 100vw; overflow: hidden; }
+.image-half { background: url('https://images.unsplash.com/photo-1599658880436-c61792e70672?q=80&w=2670&auto=format&fit=crop') no-repeat center center; background-size: cover; }
+.form-half { background-color: #f8f9fa; }
+.login-box { max-width: 400px; width: 100%; }
+
+/* --- NUEVOS ESTILOS PARA LA VISTA PRINCIPAL CON SIDEBAR --- */
+
+/* Contenedor principal que organiza el layout */
+.main-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
-pre {
-    white-space: pre-wrap;       /* Since CSS 2.1 */
-    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-    white-space: -pre-wrap;      /* Opera 4-6 */
-    white-space: -o-pre-wrap;    /* Opera 7 */
-    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+/* Estilos del Sidebar */
+.sidebar {
+  width: 260px; /* Ancho del sidebar */
+  background-color: #0d1b2a; /* Color oscuro para el sidebar */
+  color: #e0e1dd;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  flex-shrink: 0; /* Evita que el sidebar se encoja */
 }
-```typescript
-// frontend/src/app/app-routing.module.ts
-// Configuración de las rutas de la aplicación.
 
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+.sidebar-header {
+  padding: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-bottom: 1px solid #1b263b;
+  display: flex;
+  align-items: center;
+}
 
-const routes: Routes = [];
+/* Estilos para los enlaces de navegación */
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1; /* Ocupa el espacio restante */
+}
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
+.nav-links li a {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  color: #e0e1dd;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-links li a .bi {
+  font-size: 1.2rem;
+  margin-right: 15px;
+  width: 20px; /* Ancho fijo para el icono */
+  text-align: center;
+}
+
+.nav-links li a:hover {
+  background-color: #1b263b;
+  color: #ffffff;
+}
+
+/* Estilo para el enlace activo */
+.nav-links li a.active {
+  background-color: #415a77;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/* Contenido Principal */
+.main-content {
+  flex-grow: 1; /* Ocupa todo el espacio restante */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: margin-left 0.3s ease;
+}
+
+.content-area {
+  flex-grow: 1;
+  overflow-y: auto; /* Permite scroll solo en el área de contenido */
+  background-color: #f4f7fc;
+}
+
+/* --- ESTILOS PARA EL SIDEBAR COLAPSADO --- */
+
+.sidebar-collapsed .sidebar {
+  width: 0; /* El sidebar desaparece */
+  overflow: hidden;
+}
+
+.sidebar-collapsed .sidebar .nav-links span,
+.sidebar-collapsed .sidebar .sidebar-header span {
+  display: none; /* Oculta el texto */
+}
