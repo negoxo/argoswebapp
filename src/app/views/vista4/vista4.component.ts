@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-vista4',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './vista4.component.html',
-  styleUrl: './vista4.component.css'
+  styleUrls: ['./vista4.component.css']
 })
 export class Vista4Component {
 

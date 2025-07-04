@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-vista3',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './vista3.component.html',
-  styleUrl: './vista3.component.css'
+  styleUrls: ['./vista3.component.css']
 })
 export class Vista3Component {
 
