@@ -3,7 +3,6 @@
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// 1. Importa RouterOutlet y RouterLink para la navegación
 import { RouterOutlet, RouterLink } from '@angular/router'; 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MsalService, MsalBroadcastService } from '@azure/msal-angular';
@@ -12,24 +11,28 @@ import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 
+// 1. Importa el nuevo componente de la barra de acceso rápido
+// (Asegúrate de que la ruta sea correcta según donde creaste el componente)
+import { QuickAccessBarComponent } from './components/quick-access-bar/quick-access-bar.component';
+
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     CommonModule, 
     HttpClientModule,
-    RouterOutlet, // <-- 2. Añade RouterOutlet aquí
-    RouterLink    // <-- 3. Añade RouterLink aquí
+    RouterOutlet,
+    RouterLink,
+    QuickAccessBarComponent // 2. Añade el componente a los imports
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'Argos Web App'; // Título actualizado
+  title = 'Argos Web App';
   isLoggedIn = false;
   userName: string | undefined = '';
   
-  // 4. Variable para controlar la visibilidad del sidebar
   isSidebarVisible = true; 
 
   backendResponse: any = null;
@@ -58,7 +61,6 @@ export class AppComponent implements OnInit, OnDestroy {
       });
   }
 
-  // 5. Función para mostrar/ocultar el sidebar
   toggleSidebar() {
     this.isSidebarVisible = !this.isSidebarVisible;
   }
@@ -86,7 +88,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authService.logoutPopup({ mainWindowRedirectUri: "/" });
   }
 
-  // ... (los métodos getDataFromBackend y getProfileFromGraph se mantienen igual)
   getDataFromBackend() {
     this.loadingBackend = true;
     this.backendResponse = null;
@@ -122,7 +123,6 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     });
   }
-
 
   ngOnDestroy(): void {
     this._destroying$.next(undefined);
