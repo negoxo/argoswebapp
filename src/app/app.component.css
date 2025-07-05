@@ -1,12 +1,58 @@
-/* Estilos existentes para el login (sin cambios) */
-.login-container { height: 100vh; width: 100vw; overflow: hidden; }
-.image-half { background: url('../assets/images/ARGOS.jpeg') no-repeat center center; background-size: cover; }
-.form-half { background-color: #f8f9fa; }
-.login-box { max-width: 400px; width: 100%; }
+/* Estilos existentes para el login (con nuevos colores) */
+.login-container {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
 
-/* --- NUEVOS ESTILOS PARA LA VISTA PRINCIPAL CON SIDEBAR --- */
+.image-half {
+  background: url('../assets/images/ARGOS.jpeg') no-repeat center center;
+  background-size: cover;
+}
 
-/* Contenedor principal que organiza el layout */
+/* --- CAMBIOS DE COLOR AQUÍ --- */
+
+/* 1. Fondo del formulario de login */
+.form-half {
+  background-color: #071D49; /* Color corporativo RGB(7, 29, 73) */
+  color: #ffffff; /* Cambiamos el texto a blanco para que sea legible */
+}
+
+.login-box {
+  max-width: 400px;
+  width: 100%;
+}
+
+/* 2. Color del ícono de candado */
+.login-box .bi-shield-lock-fill {
+  color: #C4D600 !important; /* Usamos el amarillo de Argos para contraste */
+}
+
+/* 3. Color del botón de Microsoft */
+.btn-primary {
+  background-color: #C4D600 !important; /* Botón en amarillo Argos */
+  border-color: #C4D600 !important;
+  color: #071D49 !important; /* Texto del botón en azul oscuro */
+  font-weight: bold;
+}
+
+.btn-primary:hover {
+  background-color: #b0bd00 !important; /* Un tono más oscuro para el hover */
+  border-color: #b0bd00 !important;
+}
+
+/* Ajustes de color para el texto dentro del formulario */
+.form-half h1 {
+  color: #ffffff;
+}
+
+.form-half .text-muted {
+  color: #e0e0e0 !important; /* Hacemos el texto 'muted' un poco más claro */
+}
+
+
+/* --- ESTILOS PARA LA VISTA PRINCIPAL CON SIDEBAR --- */
+
 .main-container {
   display: flex;
   width: 100%;
@@ -14,15 +60,14 @@
   overflow: hidden;
 }
 
-/* Estilos del Sidebar */
 .sidebar {
-  width: 260px; /* Ancho del sidebar */
-  background-color: #071D49; /* Color oscuro para el sidebar */
-  color: #C4D600;
+  width: 260px;
+  background-color: #C4D600;
+  color: #071D49;
   display: flex;
   flex-direction: column;
   transition: width 0.3s ease;
-  flex-shrink: 0; /* Evita que el sidebar se encoja */
+  flex-shrink: 0;
 }
 
 .sidebar-header {
@@ -34,19 +79,18 @@
   align-items: center;
 }
 
-/* Estilos para los enlaces de navegación */
 .nav-links {
   list-style: none;
   padding: 0;
   margin: 0;
-  flex-grow: 1; /* Ocupa el espacio restante */
+  flex-grow: 1;
 }
 
 .nav-links li a {
   display: flex;
   align-items: center;
   padding: 15px 20px;
-  color: #C4D600;
+  color: #071D49;
   text-decoration: none;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -54,7 +98,7 @@
 .nav-links li a .bi {
   font-size: 1.2rem;
   margin-right: 15px;
-  width: 20px; /* Ancho fijo para el icono */
+  width: 20px;
   text-align: center;
 }
 
@@ -63,36 +107,45 @@
   color: #ffffff;
 }
 
-/* Estilo para el enlace activo */
 .nav-links li a.active {
   background-color: #415a77;
   color: #ffffff;
   font-weight: bold;
 }
 
-/* Contenido Principal */
 .main-content {
-  flex-grow: 1; /* Ocupa todo el espacio restante */
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   transition: margin-left 0.3s ease;
 }
 
+/* --- ESTILO AÑADIDO PARA EL BOTÓN DEL SIDEBAR --- */
+.main-content .navbar .btn-outline-primary {
+  border-color: #071D49;
+  color: #071D49;
+}
+
+.main-content .navbar .btn-outline-primary:hover {
+  background-color: #C4D600; /* Color amarillo/lima de Argos */
+  color: #071D49; /* Texto/icono en azul oscuro para contraste */
+  border-color: #C4D600;
+}
+/* --- FIN DEL ESTILO AÑADIDO --- */
+
 .content-area {
   flex-grow: 1;
-  overflow-y: auto; /* Permite scroll solo en el área de contenido */
+  overflow-y: auto;
   background-color: #f4f7fc;
 }
 
-/* --- ESTILOS PARA EL SIDEBAR COLAPSADO --- */
-
 .sidebar-collapsed .sidebar {
-  width: 0; /* El sidebar desaparece */
+  width: 0;
   overflow: hidden;
 }
 
 .sidebar-collapsed .sidebar .nav-links span,
 .sidebar-collapsed .sidebar .sidebar-header span {
-  display: none; /* Oculta el texto */
+  display: none;
 }
