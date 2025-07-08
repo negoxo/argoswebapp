@@ -9,5 +9,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./vista2.component.css'] // Apunta a su propio archivo CSS
 })
 export class Vista2Component {
-
+  // No hay propiedades de datos (salesData, inventoryData, etc.) aquí
+  // porque el HTML de vista2 no las usa en esta versión.
 }
