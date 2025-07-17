@@ -4,7 +4,9 @@
 
   <div class="row">
     <div class="col-lg" *ngFor="let region of regionsData">
-      <h4 class="column-header">{{ region.name }}</h4>
+      <button class="btn btn-outline-dark region-button mb-3 w-100" (click)="selectRegion(region.name)">
+        {{ region.name }}
+      </button>
 
       <div class="card shadow-sm mb-4 indicator-card sales-card">
         <div class="card-body">
