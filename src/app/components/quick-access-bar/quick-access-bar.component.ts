@@ -1,4 +1,3 @@
-// C:\JoseDesarrollo\Portales\ArgosTerminalesDigitalesAntillasFrontend\argoswebapp\src\app\components\quick-access-bar\quick-access-bar.component.ts
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';

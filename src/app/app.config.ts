@@ -1,5 +1,3 @@
-// src/app/app.config.ts
-
 import { ApplicationConfig, APP_INITIALIZER, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'; 
@@ -41,7 +39,7 @@ export function MSALInstanceFactory(): PublicClientApplication {
   });
 }
 
-// Función de fábrica para el inicializador de la aplicación (sin cambios)
+// Función de fábrica para el inicializador de la aplicación
 export function MSALAppInitializerFactory(msalService: MsalService): () => Promise<void> {
   return () => msalService.instance.initialize();
 }

@@ -1,4 +1,3 @@
-// frontend/src/app/app.component.ts
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, Router, NavigationEnd } from '@angular/router';
@@ -9,7 +8,7 @@ import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 
-// No es necesario importar QuickAccessBarComponent aquí si no se va a renderizar directamente
+
 // import { QuickAccessBarComponent } from './components/quick-access-bar/quick-access-bar.component';
 
 @Component({
@@ -20,7 +19,7 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     RouterOutlet,
     RouterLink,
-    // Elimina QuickAccessBarComponent de los imports si ya no lo usas directamente aquí
+    
     // QuickAccessBarComponent
   ],
   templateUrl: './app.component.html',
