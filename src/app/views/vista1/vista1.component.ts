@@ -27,14 +27,11 @@ interface RegionData {
 })
 export class Vista1Component implements OnInit {
 
-  regionsData: RegionData[] = []; // Array para almacenar los datos de todas las regiones
+  regionsData: RegionData[] = [];
 
-  // selectedRegion: string | null = null; // Podrías usar esto para saber qué región está seleccionada
-
-  constructor(private router: Router) { } // Inyecta el Router
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-    // Cargar datos de los indicadores para cada región
     this.loadRegionsIndicatorData();
   }
 
@@ -73,11 +70,11 @@ export class Vista1Component implements OnInit {
     ];
   }
 
-  // Nuevo método para manejar el clic en los botones de región
+  // Navegar a la ruta base de la región. El enrutamiento anidado se encargará de la sub-vista predeterminada.
   selectRegion(regionName: string): void {
     console.log(`Región seleccionada: ${regionName}`);
-    // Convertir el nombre de la región a un formato de URL (ej. "Saint Maarteen" -> "saint-maarteen")
+    // Convierte el nombre de la región a un formato de ruta (ej. "Saint Maarteen" -> "saint-maarteen")
     const routePath = regionName.toLowerCase().replace(/\s/g, '-');
-    this.router.navigate(['/', routePath]); // Navegar a la ruta dinámica
+    this.router.navigate(['/', routePath]);
   }
 }

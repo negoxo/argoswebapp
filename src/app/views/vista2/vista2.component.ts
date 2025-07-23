@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// import { CommonModule } from '@angular/common'; // Ya no es necesario importar aquí si el padre lo hace
 
 @Component({
   selector: 'app-vista2',
   standalone: true,
-  imports: [CommonModule],
+  imports: [], // Deja esto vacío o con los módulos específicos que use Vista2
   templateUrl: './vista2.component.html',
-  styleUrls: ['./vista2.component.css'] // Apunta a su propio archivo CSS
+  styleUrls: ['./vista2.component.css']
 })
 export class Vista2Component {
-  // No hay propiedades de datos (salesData, inventoryData, etc.) aquí
-  // porque el HTML de vista2 no las usa en esta versión.
+  // Lógica específica de la Vista 2 (Total Sales)
 }

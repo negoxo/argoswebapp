@@ -1,9 +1,7 @@
 // frontend/src/app/app.component.ts
-// Lógica del componente principal.
-
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, RouterLink } from '@angular/router'; 
+import { RouterOutlet, RouterLink, Router, NavigationEnd } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MsalService, MsalBroadcastService } from '@azure/msal-angular';
 import { InteractionStatus, AuthenticationResult } from '@azure/msal-browser';
@@ -11,19 +9,19 @@ import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 
-// 1. Importa el nuevo componente de la barra de acceso rápido
-// (Asegúrate de que la ruta sea correcta según donde creaste el componente)
-import { QuickAccessBarComponent } from './components/quick-access-bar/quick-access-bar.component';
+// No es necesario importar QuickAccessBarComponent aquí si no se va a renderizar directamente
+// import { QuickAccessBarComponent } from './components/quick-access-bar/quick-access-bar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule, 
+    CommonModule,
     HttpClientModule,
     RouterOutlet,
     RouterLink,
-    QuickAccessBarComponent // 2. Añade el componente a los imports
+    // Elimina QuickAccessBarComponent de los imports si ya no lo usas directamente aquí
+    // QuickAccessBarComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
@@ -32,12 +30,13 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'Argos Web App';
   isLoggedIn = false;
   userName: string | undefined = '';
-  
-  isSidebarVisible = true; 
+
+  isSidebarVisible = true;
+  // showQuickAccessBar: boolean = false; // Eliminar esta propiedad
 
   backendResponse: any = null;
   graphProfile: any = null;
-  
+
   loadingBackend = false;
   loadingGraph = false;
   errorMessage: string | null = null;
@@ -47,7 +46,8 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private authService: MsalService,
     private msalBroadcastService: MsalBroadcastService,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +59,15 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.checkAccount();
       });
+
+    // Elimina la suscripción a eventos de router para controlar showQuickAccessBar
+    // Ya no es necesaria aquí.
+    // this.router.events.pipe(
+    //   filter(event => event instanceof NavigationEnd),
+    //   takeUntil(this._destroying$)
+    // ).subscribe((event: NavigationEnd) => {
+    //   this.showQuickAccessBar = event.urlAfterRedirects !== '/vista1';
+    // });
   }
 
   toggleSidebar() {

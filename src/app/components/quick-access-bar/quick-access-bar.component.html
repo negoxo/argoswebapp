@@ -1,33 +1,8 @@
 <div class="quick-access-container shadow-sm">
   <div class="quick-access-scroll">
-    <a class="quick-card" routerLink="/vista1" routerLinkActive="active-card">
-      <i class="bi bi-speedometer2"></i>
-      <span>HOME</span>
-    </a>
-
-    <a class="quick-card" routerLink="/vista2" routerLinkActive="active-card">
-      <i class="bi bi-graph-up"></i>
-      <span>TOTAL SALES</span>
-    </a>
-
-    <a class="quick-card" routerLink="/vista3" routerLinkActive="active-card">
-      <i class="bi bi-table"></i>
-      <span>INVENTORY</span>
-    </a>
-
-    <a class="quick-card" routerLink="/vista4" routerLinkActive="active-card">
-      <i class="bi bi-sliders"></i>
-      <span>CUMULATED DEMURRAGES</span>
-    </a>
-
-    <a class="quick-card" routerLink="/vista5" routerLinkActive="active-card">
-      <i class="bi bi-gear"></i>
-      <span>OUT-OF-SERVICE-EQUIPMENT</span>
-    </a>
-
-    <a class="quick-card" routerLink="/vista6" routerLinkActive="active-card">
-      <i class="bi bi-shield-check"></i>
-      <span>FIELD STAFF</span>
+    <a *ngFor="let link of links" class="quick-card" [routerLink]="link.routerLink" routerLinkActive="active-card">
+      <i class="bi" [ngClass]="link.icon"></i>
+      <span>{{ link.label }}</span>
     </a>
   </div>
 </div>
