@@ -10,13 +10,12 @@ import { RouterOutlet, Router, ActivatedRoute } from '@angular/router'; // Impor
   templateUrl: './dominica.component.html',
   styleUrl: './dominica.component.css'
 })
+
 export class DominicaComponent implements OnInit {
   currentBasePath: string = '';
-
   constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
-
   ngOnInit(): void {
-    // Captura la ruta actual para pasarla a la barra de acceso rápido
-    this.currentBasePath = this.router.url.split('?')[0]; // Elimina query params si los hay
+    this.currentBasePath = '/' + this.activatedRoute.snapshot.url.map(segment => segment.path).join('/');
+    console.log('DominicaComponent currentBasePath:', this.currentBasePath);
   }
 }
