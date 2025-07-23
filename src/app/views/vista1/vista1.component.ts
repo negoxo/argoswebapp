@@ -1,4 +1,3 @@
-// C:\JoseDesarrollo\Portales\ArgosTerminalesDigitalesAntillasFrontend\argoswebapp\src\app\views\vista1\vista1.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router'; // Importa Router
@@ -77,12 +76,8 @@ export class Vista1Component implements OnInit {
   // Nuevo método para manejar el clic en los botones de región
   selectRegion(regionName: string): void {
     console.log(`Región seleccionada: ${regionName}`);
-    // Aquí puedes añadir la lógica que desees al hacer clic en el botón.
-    // Por ejemplo, podrías:
-    // 1. Navegar a una nueva ruta con la región como parámetro:
-    //    this.router.navigate(['/region-detail', regionName]);
-    // 2. Filtrar los datos en esta misma vista si tuvieras más datos disponibles.
-    // 3. Abrir un modal con información detallada de la región.
-    // this.selectedRegion = regionName; // Si necesitas guardar la región seleccionada
+    // Convertir el nombre de la región a un formato de URL (ej. "Saint Maarteen" -> "saint-maarteen")
+    const routePath = regionName.toLowerCase().replace(/\s/g, '-');
+    this.router.navigate(['/', routePath]); // Navegar a la ruta dinámica
   }
 }
