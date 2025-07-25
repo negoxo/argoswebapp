@@ -1,27 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
-import { Router } from '@angular/router'; // Importa Router
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common'; // Importa DatePipe
+import { Router } from '@angular/router';
 
-// Interfaz para la estructura de un indicador individual
-interface Indicator {
-  value: number;
-  change?: number; // Para ventas/rendimiento
-  trend: 'up' | 'down' | 'improving' | 'declining' | 'stable' | 'decreasing';
-  context: string; // Texto descriptivo (ej. "vs. mes anterior", "Días de Suministro")
+// Nuevas interfaces para la estructura de los datos de cada tarjeta
+interface CurrentStatusData {
+  todayValue: number; // e.g., 350
+  todayUnit: string; // e.g., 'Tn'
+  silos: number; // e.g., 90 (para 90%)
+  compliance: number; // e.g., 90 (para 90%)
+  trucks: number; // e.g., 25
+}
+
+interface NextShipData {
+  ea: string; // Formato 'YYYY-MM-DD' para la fecha estimada de llegada
+  tons: number; // e.g., 6500
+  stockoutRisk: number; // e.g., 60 (para 60%)
+}
+
+interface CurrentMonthData {
+  currentTons: number; // e.g., 12300
+  totalProjectionTons: number; // e.g., 18700
 }
 
 // Interfaz para el conjunto de indicadores de una región
 interface RegionData {
+  id: number; // Añadido para identificar la isla (101, 102, 103, 104)
   name: string;
-  sales: Indicator;
-  inventory: Indicator;
-  performance: Indicator;
+  currentStatus: CurrentStatusData;
+  nextShip: NextShipData;
+  currentMonth: CurrentMonthData;
 }
 
 @Component({
   selector: 'app-vista1',
   standalone: true,
-  imports: [CommonModule, CurrencyPipe],
+  imports: [CommonModule, CurrencyPipe, DatePipe], // Añade DatePipe a imports
   templateUrl: './vista1.component.html',
   styleUrl: './vista1.component.css'
 })
@@ -36,36 +49,44 @@ export class Vista1Component implements OnInit {
   }
 
   private loadRegionsIndicatorData(): void {
+    // Generar la fecha actual para los datos dummy de "Today" si es necesario
+    const today = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
+
     this.regionsData = [
       {
+        id: 100, // ID inventado para Antilles, ya que no es una isla individual
         name: 'Antilles',
-        sales: { value: 125000, change: 8.2, trend: 'up', context: 'vs. mes anterior' },
-        inventory: { value: 5000, trend: 'stable', context: 'Días de Suministro: 30' },
-        performance: { value: 92, trend: 'improving', context: 'Últimos 30 días' }
+        currentStatus: { todayValue: 350, todayUnit: 'Tn', silos: 90, compliance: 90, trucks: 25 },
+        nextShip: { ea: '2025-07-30', tons: 5000, stockoutRisk: 10 },
+        currentMonth: { currentTons: 9200, totalProjectionTons: 10000 }
       },
       {
+        id: 101,
         name: 'Saint Maarteen',
-        sales: { value: 85000, change: -3.5, trend: 'down', context: 'vs. mes anterior' },
-        inventory: { value: 3200, trend: 'decreasing', context: 'Días de Suministro: 20' },
-        performance: { value: 78, trend: 'declining', context: 'Últimos 30 días' }
+        currentStatus: { todayValue: 850, todayUnit: 'Tn', silos: 85, compliance: 80, trucks: 18 },
+        nextShip: { ea: '2025-07-28', tons: 3200, stockoutRisk: 15 },
+        currentMonth: { currentTons: 7800, totalProjectionTons: 10000 }
       },
       {
+        id: 102,
         name: 'Saint Thomas',
-        sales: { value: 180000, change: 15.1, trend: 'up', context: 'vs. mes anterior' },
-        inventory: { value: 6500, trend: 'stable', context: 'Días de Suministro: 50' },
-        performance: { value: 95, trend: 'improving', context: 'Últimos 30 días' }
+        currentStatus: { todayValue: 1800, todayUnit: 'Tn', silos: 95, compliance: 92, trucks: 30 },
+        nextShip: { ea: '2025-07-27', tons: 6500, stockoutRisk: 5 },
+        currentMonth: { currentTons: 9500, totalProjectionTons: 10000 }
       },
       {
+        id: 103,
         name: 'Antigua',
-        sales: { value: 60000, change: 2.1, trend: 'up', context: 'vs. mes anterior' },
-        inventory: { value: 2100, trend: 'stable', context: 'Días de Suministro: 25' },
-        performance: { value: 85, trend: 'improving', context: 'Últimos 30 días' }
+        currentStatus: { todayValue: 600, todayUnit: 'Tn', silos: 88, compliance: 87, trucks: 20 },
+        nextShip: { ea: '2025-08-01', tons: 2100, stockoutRisk: 25 },
+        currentMonth: { currentTons: 8500, totalProjectionTons: 10000 }
       },
       {
+        id: 104,
         name: 'Dominica',
-        sales: { value: 45000, change: -7.0, trend: 'down', context: 'vs. mes anterior' },
-        inventory: { value: 1500, trend: 'decreasing', context: 'Días de Suministro: 15' },
-        performance: { value: 70, trend: 'declining', context: 'Últimos 30 días' }
+        currentStatus: { todayValue: 450, todayUnit: 'Tn', silos: 75, compliance: 70, trucks: 10 },
+        nextShip: { ea: '2025-08-02', tons: 1500, stockoutRisk: 35 },
+        currentMonth: { currentTons: 7000, totalProjectionTons: 10000 }
       }
     ];
   }

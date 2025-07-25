@@ -8,75 +8,47 @@
         {{ region.name }}
       </button>
 
-      <div class="card shadow-sm mb-4 indicator-card sales-card">
+      <div class="card shadow-sm mb-4 indicator-card status-card">
         <div class="card-body">
           <h5 class="card-title">
-            <i class="bi bi-graph-up-arrow me-2"></i>Ventas
+            <i class="bi bi-bar-chart-fill me-2"></i>Current Status
           </h5>
-          <p class="indicator-value text-success">
-            {{ region.sales.value | currency:'USD':'symbol':'1.0-0' }}
+          <p class="indicator-value">
+            Today: {{ region.currentStatus.todayValue }} {{ region.currentStatus.todayUnit }}
           </p>
           <p class="indicator-context">
-            <span
-              [class.text-success]="region.sales.trend === 'up'"
-              [class.text-danger]="region.sales.trend === 'down'"
-            >
-              <i
-                class="bi"
-                [class.bi-arrow-up-right]="region.sales.trend === 'up'"
-                [class.bi-arrow-down-right]="region.sales.trend === 'down'"
-              ></i>
-              {{ region.sales.change }}%
-            </span>
-            {{ region.sales.context }}
+            Silos: {{ region.currentStatus.silos }}% <br>
+            Compliance: {{ region.currentStatus.compliance }}% <br>
+            Trucks: {{ region.currentStatus.trucks }}
           </p>
         </div>
       </div>
 
-      <div class="card shadow-sm mb-4 indicator-card inventory-card">
+      <div class="card shadow-sm mb-4 indicator-card ship-card">
         <div class="card-body">
           <h5 class="card-title">
-            <i class="bi bi-box-seam me-2"></i>Inventario
+            <i class="bi bi-box-seam me-2"></i>Next Ship
           </h5>
-          <p class="indicator-value text-info">
-            {{ region.inventory.value }} Unidades
+          <p class="indicator-value">
+            EA: {{ region.nextShip.ea | date:'mediumDate' }}
           </p>
           <p class="indicator-context">
-            <span
-              [class.text-success]="region.inventory.trend === 'stable'"
-              [class.text-warning]="region.inventory.trend === 'decreasing'"
-            >
-              <i
-                class="bi"
-                [class.bi-dash-lg]="region.inventory.trend === 'stable'"
-                [class.bi-arrow-down-right]="region.inventory.trend === 'decreasing'"
-              ></i>
-              {{ region.inventory.context }}
-            </span>
+            TONS: {{ region.nextShip.tons }} <br>
+            % Stockout Risk: {{ region.nextShip.stockoutRisk }}%
           </p>
         </div>
       </div>
 
-      <div class="card shadow-sm mb-4 indicator-card performance-card">
+      <div class="card shadow-sm mb-4 indicator-card month-card">
         <div class="card-body">
           <h5 class="card-title">
-            <i class="bi bi-speedometer2 me-2"></i>Rendimiento
+            <i class="bi bi-calendar-month me-2"></i>Current Month
           </h5>
-          <p class="indicator-value text-primary">
-            {{ region.performance.value }}%
+          <p class="indicator-value">
+            Current: {{ region.currentMonth.currentTons }} Tons
           </p>
           <p class="indicator-context">
-            <span
-              [class.text-success]="region.performance.trend === 'improving'"
-              [class.text-danger]="region.performance.trend === 'declining'"
-            >
-              <i
-                class="bi"
-                [class.bi-arrow-up-right]="region.performance.trend === 'improving'"
-                [class.bi-arrow-down-right]="region.performance.trend === 'declining'"
-              ></i>
-              {{ region.performance.context }}
-            </span>
+            Total Projection: {{ region.currentMonth.totalProjectionTons }} Tons
           </p>
         </div>
       </div>

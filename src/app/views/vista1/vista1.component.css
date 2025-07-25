@@ -12,7 +12,7 @@
   color: #415a77; /* Color secundario */
 }
 
-/* --- NUEVOS ESTILOS PARA EL ENCABEZADO DE COLUMNA --- */
+/* --- NUEVOS ESTILOS PARA EL ENCABEZADO DE COLUMNA (si aplica, este era de un turno anterior) --- */
 .column-header {
   background-color: #e9ecef;
   padding: 0.75rem 1rem;
@@ -25,7 +25,7 @@
   border: 1px solid #dee2e6;
 }
 
-/* --- Estilos para las tarjetas de indicadores (NUEVOS) --- */
+/* --- Estilos para las tarjetas de indicadores (modificados) --- */
 .indicator-card {
   border-left: 5px solid; /* Borde de color para distinción */
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
@@ -50,30 +50,64 @@
 }
 
 .indicator-value {
-  font-size: 1.8rem; /* Ajustado para el espacio */
+  font-size: 1.6rem; /* Ajustado para el espacio */
   font-weight: 700;
   margin-bottom: 0.2rem;
+  color: #0d1b2a; /* Color principal para los valores */
 }
 
 .indicator-context {
-  font-size: 0.8rem; /* Más pequeño para el contexto */
+  font-size: 0.85rem; /* Más pequeño para el contexto */
   color: #6c757d;
+  line-height: 1.4; /* Espaciado entre líneas */
 }
 
 .indicator-context span i {
   margin-right: 3px; /* Espacio reducido */
 }
 
-/* Colores específicos para cada tipo de tarjeta */
-.sales-card {
-  border-left-color: #28a745; /* Verde para ventas */
+/* Colores específicos para cada tipo de tarjeta (actualizados) */
+.status-card {
+  border-left-color: #28a745; /* Verde para Current Status */
 }
 
-.inventory-card {
-  border-left-color: #17a2b8; /* Azul claro para inventario */
+.ship-card {
+  border-left-color: #17a2b8; /* Azul claro para Next Ship */
 }
 
-.performance-card {
-  border-left-color: #007bff; /* Azul oscuro para rendimiento */
+.month-card {
+  border-left-color: #007bff; /* Azul oscuro para Current Month */
 }
 
+/* Ajustes responsivos para las columnas */
+.row .col-lg {
+  flex: 0 0 100%; /* Cada columna ocupa todo el ancho por defecto */
+  max-width: 100%;
+}
+
+@media (min-width: 992px) { /* A partir de 'lg' (desktop) */
+  .row .col-lg {
+    flex: 0 0 calc(100% / 5); /* 5 columnas por fila */
+    max-width: calc(100% / 5);
+    padding-right: 7.5px; /* Espacio entre columnas */
+    padding-left: 7.5px;  /* Espacio entre columnas */
+  }
+  .row {
+    margin-right: -7.5px; /* Compensa el padding de las columnas */
+    margin-left: -7.5px;  /* Compensa el padding de las columnas */
+  }
+}
+
+/* Estilos para el botón de la región */
+.region-button {
+  border-color: #415a77;
+  color: #415a77;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.region-button:hover {
+  background-color: #415a77;
+  color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
