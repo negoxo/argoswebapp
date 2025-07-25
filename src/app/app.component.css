@@ -76,9 +76,34 @@
   font-weight: bold;
   border-bottom: 1px solid #1b263b;
   display: flex;
-  align-items: center;
+  flex-direction: column; /* Cambiado para permitir apilar elementos */
+  align-items: center; /* Centra los elementos horizontalmente */
+  gap: 5px; /* Espacio entre los elementos del header */
 }
 
+.sidebar-logo {
+  max-width: 120px;
+  height: auto;
+  margin-bottom: 5px; /* Ajuste para el nuevo layout */
+}
+
+.sidebar-header h3 {
+  color: #071D49; /* Color del texto "ArgosWeb" */
+  font-size: 1.8rem;
+  margin: 0; /* Elimina márgenes predeterminados */
+  font-weight: 700;
+}
+
+/* Estilo para el nombre de la ubicación actual */
+.sidebar-header .current-location {
+  color: #415a77; /* Color secundario para el nombre de la ubicación */
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 5px; /* Espacio entre el título de la app y la ubicación */
+}
+
+
+/* Listado de componentes (enlaces del sidebar) */
 .nav-links {
   list-style: none;
   padding: 0;
@@ -108,10 +133,27 @@
 }
 
 .nav-links li a.active {
-  background-color: #415a77;
-  color: #ffffff;
+  background-color: #C4D600; /* Color de fondo para el enlace activo */
+  color: #071D49 !important; /* Color de texto oscuro para el enlace activo */
   font-weight: bold;
 }
+
+/* Sub-enlaces (ej. dentro de "Regions") */
+.nav-links .sub-link {
+  padding-left: 40px; /* Indentación para sub-enlaces */
+  background-color: rgba(7, 29, 73, 0.05); /* Ligero cambio de color para sub-menú */
+}
+
+.nav-links .sub-link:hover {
+  background-color: rgba(7, 29, 73, 0.1);
+}
+
+.nav-links .sub-link.active {
+  background-color: #C4D600 !important;
+  color: #071D49 !important;
+  border-left: 5px solid #415a77; /* Borde izquierdo para el sub-enlace activo */
+}
+
 
 .main-content {
   flex-grow: 1;
@@ -146,6 +188,7 @@
 }
 
 .sidebar-collapsed .sidebar .nav-links span,
-.sidebar-collapsed .sidebar .sidebar-header span {
+.sidebar-collapsed .sidebar .sidebar-header span,
+.sidebar-collapsed .sidebar .current-location { /* Oculta el texto de la ubicación también */
   display: none;
 }

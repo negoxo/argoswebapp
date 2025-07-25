@@ -22,15 +22,34 @@
 
     <div class="sidebar">
       <div class="sidebar-header">
-        <i class="bi bi-shield-check-fill me-2"></i>
-        <span>{{ title }}</span>
+        <h3>Terminales Digitales</h3>
+        <h4 class="current-location">{{ currentLocationName }}</h4>
       </div>
       <ul class="nav-links">
         <li><a routerLink="/vista1" routerLinkActive="active"><i class="bi bi-house-door-fill"></i><span>Home</span></a></li>
         <li><a routerLink="/demand-projection" routerLinkActive="active"><i class="bi bi-graph-up"></i><span>Demand Projection</span></a></li>
         <li><a routerLink="/ai-suggestions" routerLinkActive="active"><i class="bi bi-lightbulb-fill"></i><span>AI Based Suggestions</span></a></li>
         <li><a routerLink="/notifications" routerLinkActive="active"><i class="bi bi-bell-fill"></i><span>Notifications</span></a></li>
-        </ul>
+        <li>
+          <a href="#regionsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle sidebar-link">
+            <i class="bi bi-globe-americas"></i> Regions
+          </a>
+          <ul class="collapse list-unstyled" id="regionsSubmenu">
+            <li>
+              <a routerLink="/saint-maarteen" routerLinkActive="active" class="sidebar-link sub-link">Saint Maarteen</a>
+            </li>
+            <li>
+              <a routerLink="/saint-thomas" routerLinkActive="active" class="sidebar-link sub-link">Saint Thomas</a>
+            </li>
+            <li>
+              <a routerLink="/antigua" routerLinkActive="active" class="sidebar-link sub-link">Antigua</a>
+            </li>
+            <li>
+              <a routerLink="/dominica" routerLinkActive="active" class="sidebar-link sub-link">Dominica</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
 
     <div class="main-content">
