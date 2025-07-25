@@ -10,13 +10,16 @@
   display: flex;
   flex-wrap: nowrap;
   gap: 0.75rem;
+  padding-bottom: 0.5rem; /* Añadir padding para permitir el scroll si es necesario */
 }
 
+/* Ajustes para las tarjetas más grandes y con más contenido */
 .quick-card {
   display: flex;
+  flex-direction: column; /* Cambiar a columna para apilar contenido */
   align-items: center;
   gap: 0.5rem;
-  padding: 0.6rem 1rem;
+  padding: 1rem 1.5rem; /* Aumentar el padding para hacerlas más grandes */
   background-color: white;
   border: 1px solid #e9ecef;
   border-radius: 0.375rem;
@@ -25,18 +28,57 @@
   font-weight: 500;
   white-space: nowrap;
   transition: all 0.2s ease-in-out;
+  min-width: 180px; /* Ancho mínimo para las tarjetas */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra ligera */
+  text-align: center; /* Centrar el texto */
 }
 
 .quick-card:hover {
   background-color: #e9ecef;
   border-color: #ced4da;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08); /* Sombra más pronunciada al pasar el ratón */
 }
 
-.quick-card i {
-  font-size: 1.2rem;
+.quick-card .icon-container {
+  font-size: 2rem; /* Ícono más grande */
+  color: #0d1b2a; /* Color oscuro del sidebar */
+  margin-bottom: 0.5rem;
+}
+
+.quick-card .card-label {
+  font-weight: 700; /* Negrita para la etiqueta */
+  font-size: 1rem;
   color: #0d1b2a;
+}
+
+.quick-card .card-value {
+  font-size: 1.5rem; /* Valor más grande */
+  font-weight: 700;
+  color: #415a77; /* Color secundario para el valor */
+  margin-top: 0.25rem;
+}
+
+.quick-card .card-trend {
+  font-size: 0.9rem; /* Tamaño para el porcentaje y contexto */
+  color: #6c757d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+}
+
+.quick-card .card-trend i {
+  font-size: 1rem; /* Tamaño del ícono de flecha */
+}
+
+/* Colores para la tendencia */
+.quick-card .card-trend .text-success {
+  color: #28a745 !important;
+}
+
+.quick-card .card-trend .text-danger {
+  color: #dc3545 !important;
 }
 
 /* Estilo para la tarjeta activa */
@@ -44,8 +86,44 @@
   background-color: #0d1b2a;
   color: white;
   border-color: #0d1b2a;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
 }
 
-.active-card i {
-  color: white;
+.active-card .icon-container i,
+.active-card .card-label,
+.active-card .card-value,
+.active-card .card-trend {
+  color: white !important; /* Texto y íconos en blanco para tarjetas activas */
+}
+
+.active-card .card-trend .text-success {
+  color: #90ee90 !important; /* Verde claro para contraste en activa */
+}
+
+.active-card .card-trend .text-danger {
+  color: #ffb6c1 !important; /* Rojo claro para contraste en activa */
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+  .quick-access-scroll {
+    flex-wrap: wrap; /* Permitir que las tarjetas se envuelvan en pantallas pequeñas */
+    justify-content: center;
+  }
+  .quick-card {
+    min-width: 140px; /* Reducir ancho mínimo en pantallas pequeñas */
+    padding: 0.8rem 1rem;
+  }
+  .quick-card .icon-container {
+    font-size: 1.5rem;
+  }
+  .quick-card .card-value {
+    font-size: 1.2rem;
+  }
+  .quick-card .card-label {
+    font-size: 0.9rem;
+  }
+  .quick-card .card-trend {
+    font-size: 0.75rem;
+  }
 }

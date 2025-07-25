@@ -1,8 +1,30 @@
 <div class="quick-access-container shadow-sm">
   <div class="quick-access-scroll">
     <a *ngFor="let link of links" class="quick-card" [routerLink]="link.routerLink" routerLinkActive="active-card">
-      <i class="bi" [ngClass]="link.icon"></i>
-      <span>{{ link.label }}</span>
+      <div class="icon-container">
+        <i class="bi" [ngClass]="link.icon"></i>
+      </div>
+      <div class="card-content">
+        <span class="card-label">{{ link.label }}</span>
+        <div *ngIf="link.value !== undefined" class="card-value">
+          {{ link.value }}
+        </div>
+        <div *ngIf="link.change !== undefined && link.trend" class="card-trend">
+          <span
+            [class.text-success]="link.trend === 'up' || link.trend === 'improving'"
+            [class.text-danger]="link.trend === 'down' || link.trend === 'declining'"
+          >
+            <i
+              class="bi"
+              [class.bi-arrow-up-right]="link.trend === 'up' || link.trend === 'improving'"
+              [class.bi-arrow-down-right]="link.trend === 'down' || link.trend === 'decreasing'"
+              [class.bi-dash-lg]="link.trend === 'stable'"
+            ></i>
+            {{ link.change }}%
+          </span>
+          <span *ngIf="link.context" class="card-context">{{ link.context }}</span>
+        </div>
+      </div>
     </a>
   </div>
 </div>
